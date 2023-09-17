@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs')
 
+
 // This npm package allows unique ids to be created!
 var uniqid = require('uniqid');
 
@@ -9,13 +10,13 @@ var uniqid = require('uniqid');
 module.exports = (app) => {
 
   // GET /api/notes should read the db.json file, returning any saved notes in JSON.
-  app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '../db/db.json'));
+  app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/notes.html'));
   });
 
   // POST /api/notes should make a new note to save on the request body, 
   // add it to the db.json file, then return the new note. 
-  app.post('/api/notes', (req, res) => {
+  app.post('/notes', (req, res) => {
     let db = fs.readFileSync('db/db.json');
     db = JSON.parse(db);
     res.json(db);
@@ -35,7 +36,7 @@ module.exports = (app) => {
 
 
   // DELETE- /api/notes/:id gets a query parameter that contains the id of a note.
-  app.delete('/api/notes/:id', (req, res) => {
+  app.delete('/notes/:id', (req, res) => {
     //reads the notes from the file - db.json
     let db = JSON.parse(fs.readFileSync('db/db.json'))
     // removes he note with the id
