@@ -34,13 +34,13 @@ module.exports = (app) => {
   });
 
 
-  // DELETE- /api/notes/:id receives a query parameter that contains the id of a note.
+  // DELETE- /api/notes/:id gets a query parameter that contains the id of a note.
   app.delete('/api/notes/:id', (req, res) => {
-    // reading notes form db.json
+    //reads the notes from the file - db.json
     let db = JSON.parse(fs.readFileSync('db/db.json'))
-    // removing note with id
+    // removes he note with the id
     let deleteNotes = db.filter(item => item.id !== req.params.id);
-    // Rewriting note to db.json
+    // Rewrities note to db.json
     fs.writeFileSync('db/db.json', JSON.stringify(deleteNotes));
     res.json(deleteNotes);
     
